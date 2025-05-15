@@ -11,7 +11,7 @@ const Home = () => {
       <NavBar />
       <div className="container mt-4">
         <div className="text-center">
-          <h1 className="display-4">Welcome Home, Darling 👋</h1>
+          {/* <h1 className="display-4">Welcome Home, Darling 👋</h1> */}
           <p className="lead">Find your dream job or hire top talent!</p>
         </div>
         <hr />

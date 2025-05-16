@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { getUser, isLoggedIn } from "../utils/auth";
 
@@ -6,6 +7,7 @@ const ApplicationLayout = () => {
   const [jobs, setJobs] = useState([]);
   const [appliedJobIds, setAppliedJobIds] = useState([]);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   // Step 1: Fetch all jobs immediately
   useEffect(() => {
@@ -86,7 +88,11 @@ const ApplicationLayout = () => {
       ) : (
         jobs.map((job) => (
           <div className="col-md-4 mb-4" key={job.id}>
-            <div className="card h-100 shadow-sm">
+            <div
+              className="card h-100 shadow-sm"
+              onClick={() => navigate("/job-info", { state: { job } })} // ✅ Redirects on card click
+              style={{ cursor: "pointer" }}
+            >
               <div className="card-body">
                 <h5 className="card-title">{job.title}</h5>
                 <p className="card-text">{job.description}</p>
@@ -97,7 +103,10 @@ const ApplicationLayout = () => {
               <div className="card-footer text-center">
                 <button
                   className="btn btn-primary"
-                  onClick={() => handleApply(job.id)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // ✅ Prevent card click redirect
+                    handleApply(job.id); // ✅ Actual apply logic
+                  }}
                   disabled={isLoggedIn() && appliedJobIds.includes(job.id)}
                 >
                   {isLoggedIn()

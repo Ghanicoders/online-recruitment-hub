@@ -8,6 +8,7 @@ import AllRoute from "./Pages/AllRoute.jsx";
 import Profile from "./Pages/profile.jsx";
 import User from "./Pages/Users.jsx";
 import JobPosting from "./Pages/JobPosting";
+import JobInfo from "./Pages/JobInfo.jsx";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/js/bootstrap.min.js';
 
@@ -27,8 +28,10 @@ function App() {
 
       {/* // inside <Routes> */}
       <Route path="/job-posting" element={<JobPosting />} />
-      {/* // to user user relatedd works */}
 
+      <Route path="/job-info" element={<JobInfo />} />
+
+      {/* // to user user relatedd works */}
       <Route path="*" element={<AllRoute />} />
     </Routes>
   );
